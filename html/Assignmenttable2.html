@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration Form</title>
+</head>
+<body>
+
+    <a href = "#personalinformation">Personal Infromation</a><br>
+    <a href = "#employeedetails">Employee Details</a><br>
+    <a href = "#emergencycontact">Emergency Contact</a><br>
+    <a href = "#addressdetails">Address Details</a><br>
+    <a href = "#logindetails">Login Details</a><br>
+
+    <h1><b>Employee Registration</b></h1>
+
+    <form>
+    <fieldset>
+    <legend id ="personalinformation"><b>Personal Information &#x1F4DD;</b></legend>
+    
+        <b>First Name<span style="color:red;">*</span></b><br>
+        <input type = "firstname" placeholder="Enter first name" required><br>
+
+        <b>Last Name<span style="color:red;">*</span></b><br>
+        <input type = "lastname" placeholder="Enter last name" required><br>
+
+        <b>Email<span style="color:red;">*</span></b><br>
+        <input type = "email" placeholder="Enter email address" required><br>
+        <small style="color:grey;">Example: john.doe@example.com</small><br>
+
+        <b>Phone Number<span style="color:red;">*</span></b><br>
+        <input type = "phone number" placeholder="Enter phone number" required><br>
+
+        <lable><b>Gender<span style="color:red;">*</span></b></lable><br>
+        <input type = "radio" required>Male
+        <input type ="radio" required>Female
+        <input type="radio" required>Others<br>
+
+        <lable><b>Date of Birth<span style="color:red;">*</span></b></lable><br>
+        <input type = "date" required><br>
+
+        <lable><b>Mariatal Status<span style="color:red;">*</span></b></lable><br>
+        <input type ="radio" required>Single
+        <input type = "radio" required>Married<br>
+        <lable><b>Spouse Name (if appliable)</b></lable><br>
+
+        <input type ="suppose name" placeholder="Enter spouse name">
+    </fieldset><br>
+
+    <fieldset>
+        <legend id = "employeedetails"><b>Employment Details &#x1F468;&#x200D;&#x1F4BC;</b></legend>
+
+        <lable><b>Department<span style="color:red;">*</span></b></lable><br>
+        <select id="department" name="department" required>
+            <option value="" disabled selected>Select Department</option>
+            <option>IT</option>
+            <option>AIDS</option>
+            <option>CSBS</option>
+            <option>CSE</option>
+        </select><br>
+
+        <lable><b>Years of Experience</b></lable><br>
+        <input type = "year of experience" placeholder="Enter experience in years"/><br>
+
+        <lable><b>Skills</b></lable><br>
+        <input type = "checkbox"/>HTML
+        <input type = "checkbox"/>CSS
+        <input type = "checkbox"/>JavaScript
+        <input type = "checkbox"/>SQL<br>
+
+        <lable><b>Certifications</b></lable><br>
+        <textarea style="width: 150px; height: 90px;" placeholder="List your certificates"></textarea><br>
+
+        <lable><b>Profile Picture</b></lable><br>
+        <input type = "file" placeholder="Choose file"/><br>
+        <small style="color:grey;">Allowed formats:JPG,PNG</small>
+    </fieldset><br>
+
+    <fieldset>
+        <legend id = "emergencycontact"><b>Emergency Contact &#x1F4DE;</b></legend>
+        <b>Contact Name<span style="color:red;">*</span></b><br><input type="contact name" placeholder="Enter contact name" required><br>
+
+        <b>Contact Phone<span style="color:red;">*</span></b><br><input type="contact phone" placeholder="Enter contact phone" required><br>
+
+        <b>Relationship<span style="color:red;">*</span></b><br><input type = "relationship" placeholder="Enter relationship (e.g.,Parent)" required>
+    </fieldset><br>
+
+    <fieldset>
+        <legend id = "addressdetails"><b>Address Details &#x1F3E0;</b></legend>
+        <lable><b>Address<span style="color:red;">*</span></b></lable><br>
+        <textarea style="width:150px;height:90px;" placeholder="Enter your address"></textarea><br>
+    </fieldset><br>
+
+    <fieldset>
+        <legend id = "logindetails"><b>Login Details &#x1F511;</b></legend>
+
+        <b>Username<span style="color:red;">*</span></b><br><input type="username" placeholder="Choose a username" required><br>
+
+        <b>Password<span style="color:red;">*</span></b><br><input type="password" placeholder="Enter password" required><br>
+
+        <b>Confirm Password<span style="color:red;">*</span></b><br><input type="confirm password" placeholder="Re-enter password" required>
+    </fieldset><br>
+
+    <button type ="submit" style="background-color: grey;">Register</button>
+    <button type="clear form" style="background-color:gray;">Clear Form</button>
+
+    </form>
+</body>
+</html>
