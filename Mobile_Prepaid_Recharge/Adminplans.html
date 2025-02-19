@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+            padding-top: 60px;
+        }
+        #plan-bar{
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body style="background-color: rgb(95, 87, 87);">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top shadow bg-dark shadow-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><p class="h2">User Panel</p></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="Admindashboard.html"><i class="bi bi-card-text"></i> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Adminplans.html"><i class="bi bi-list-task"></i> My Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Admintransaction.html"><i class="bi bi-arrow-bar-right"></i> Transaction History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Adminsettings.html"><i class="bi bi-sliders"></i> Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        <h4 class="text-white mx-2">Plans</h4>
+        <div class="accordion" id="plansAccordion">
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="validityPlansHeader">
+                    <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#validityPlans" id="plan-bar">
+                        Validity Plans
+                    </button>
+                </h2>
+                <div id="validityPlans" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <table class="table table-bordered" id="validityPlansTable">
+                            <thead><tr><th>Plan Name</th><th>Duration</th><th>Price</th></tr></thead>
+                            <tbody>
+                                <tr><td>Plan A</td><td>28 Days</td><td>Rs. 199</td></tr>
+                                <tr><td>Plan B</td><td>56 Days</td><td>Rs. 399</td></tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-dark" onclick="addPlan('validityPlansTable')">Add Plan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item mt-3">
+                <h2 class="accordion-header" id="popularPlansHeader">
+                    <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#popularPlans" id="plan-bar">
+                        Popular Plans
+                    </button>
+                </h2>
+                <div id="popularPlans" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <table class="table table-bordered" id="popularPlansTable">
+                            <thead><tr><th>Plan Name</th><th>Duration</th><th>Price</th></tr></thead>
+                            <tbody>
+                                <tr><td>Plan C</td><td>84 Days</td><td>Rs. 599</td></tr>
+                                <tr><td>Plan D</td><td>365 Days</td><td>Rs. 1499</td></tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-dark" onclick="addPlan('popularPlansTable')">Add Plan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item mt-3">
+                <h2 class="accordion-header" id="dataPlansHeader">
+                    <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#dataPlans" id="plan-bar">
+                        Data Plans
+                    </button>
+                </h2>
+                <div id="dataPlans" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <table class="table table-bordered" id="dataPlansTable">
+                            <thead><tr><th>Plan Name</th><th>Duration</th><th>Price</th></tr></thead>
+                            <tbody>
+                                <tr><td>Plan E</td><td>5GB/day</td><td>Rs. 499</td></tr>
+                                <tr><td>Plan F</td><td>2GB/day</td><td>Rs. 299</td></tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-dark" onclick="addPlan('dataPlansTable')">Add Plan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item mt-3">
+                <h2 class="accordion-header" id="unlimitedPlansHeader">
+                    <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#unlimitedPlans" id="plan-bar">
+                        Unlimited Plans
+                    </button>
+                </h2>
+                <div id="unlimitedPlans" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <table class="table table-bordered" id="unlimitedPlansTable">
+                            <thead><tr><th>Plan Name</th><th>Duration</th><th>Price</th></tr></thead>
+                            <tbody>
+                                <tr><td>Plan G</td><td>Unlimited Calls & Data</td><td>Rs. 999</td></tr>
+                                <tr><td>Plan H</td><td>Unlimited Calls, 1.5GB/day</td><td>Rs. 699</td></tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-dark" onclick="addPlan('unlimitedPlansTable')">Add Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function addPlan(tableId) {
+            let planName = prompt("Enter Plan Name:");
+            let duration = prompt("Enter Duration (e.g., 28 Days):");
+            let price = prompt("Enter Price (Rs.):");
+            
+            if (planName && duration && price) {
+                let table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+                let newRow = table.insertRow();
+                newRow.innerHTML = `<td>${planName}</td><td>${duration}</td><td>Rs. ${price}</td>`;
+            } else {
+                alert("All fields are required!");
+            }
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+#imageCarousel {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-item img {
+    filter: brightness(0.7);
+    transition: filter 0.5s ease;
+}
+
+.carousel-item:hover img {
+    filter: brightness(1);
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    bottom: 20%;
+    left: 10%;
+    right: 10%;
+    text-align: left;
+}
+
+.carousel-caption h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    animation-duration: 1s;
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+    animation-duration: 1.5s;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.otp-box {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: 0 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.otp-box:focus {
+    transform: scale(1.1);
+    border-color: #28a745;
+}
+
+.btn-success {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: rgb(26, 99, 8);
+    transform: scale(1.05);
+}
+
+header {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    animation: fadeIn 2s ease-in-out;
+}
+
+footer {
+    background: linear-gradient(270deg, #197e30, #197a2e, #1e7e34);
+    background-size: 200% 200%;
+    animation: gradientAnimation 5s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .container {
+        flex: 1;
+    }
+
+    footer {
+        margin-top: auto;
+    }
+    .otp-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 300px;
+        margin: 20px auto;
+    }
+
+    .otp-container input {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+
+    .otp-container input:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .register-link a {
+        color: #007bff;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+    }
+
+    .main-content {
+        flex: 1;
+    }
+
+    footer {
+        margin-top: auto; 
+    }
+
+        #success-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }

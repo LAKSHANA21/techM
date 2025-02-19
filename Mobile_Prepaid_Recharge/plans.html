@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOBI-COMM | Plans</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <script>
+        function filterPlans(size) {
+            const allPlans = document.querySelectorAll('.plan-card');
+            allPlans.forEach(plan => {
+                const planData = plan.dataset.data;
+                if (size === 'all' || planData.includes(size)) {
+                    plan.style.display = 'block';
+                } else {
+                    plan.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">MOBI-COMM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="plans.html">Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recharge.html">Recharge</a></li>
+                    <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="help.html">Help</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Account Settings
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="account.html">Account</a></li>
+                            <li><a class="dropdown-item" href="help.html">Help</a></li>
+                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="settings.html">Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="bg-success text-white text-center py-3">
+        <h1>Our Plans</h1>
+        <p>Choose the best plan that suits your needs</p>
+    </header>
+
+    <div class="container my-3 d-flex justify-content-end">
+        <div class="btn-group">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="javascript:void(0);" onclick="filterPlans('all')">All Plans</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0);" onclick="filterPlans('1GB')">1GB Data</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0);" onclick="filterPlans('2GB')">2GB Data</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0);" onclick="filterPlans('5GB')">5GB Data</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0);" onclick="filterPlans('10GB')">10GB Data</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0);" onclick="filterPlans('Unlimited')">Unlimited Data</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <h3 class="text-center mb-4">Validity Plans</h3>
+        <div class="row">
+            <div class="col-md-4 plan-card" data-data="1GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">26-Day Plan</h5>
+                        <p class="card-text">1GB Data/day | 26 Days | Unlimited Calls | Rs. 249.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="1.5GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">84-Day Plan</h5>
+                        <p class="card-text">1.5GB Data/day | 84 Days | Unlimited Calls | Rs.859.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="1.5GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">77-Day Plan</h5>
+                        <p class="card-text">1.5GB Data/day | 77 Days | Unlimited Calls | Rs.799.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card mt-4" data-data="2GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">56-Day Plan</h5>
+                        <p class="card-text">2GB Data/day | 56 Days | Unlimited Calls | Rs.649.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card mt-4" data-data="2GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">30-Day Plan</h5>
+                        <p class="card-text">2GB Data/day | 30 Days | Unlimited Calls | Rs.379.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card mt-4" data-data="3GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">56-Day Plan</h5>
+                        <p class="card-text">3GB Data/day | 56 Days | Unlimited Calls | Rs. 838.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="text-center mb-4 mt-5">Popular Plans</h3>
+        <div class="row">
+            <div class="col-md-4 plan-card" data-data="1GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Super saver plan</h5>
+                        <p class="card-text">1GB Data/day | 6 months | Unlimited Calls | Rs.1999.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="3GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Super saver plan</h5>
+                        <p class="card-text">3GB Data/day | 6 months | Unlimited Calls | Rs.2999.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="2GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Super saver plan</h5>
+                        <p class="card-text">2GB Data/day | 6 months | Unlimited Calls | Rs.1999.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card mt-4" data-data="5GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Super saver plan</h5>
+                        <p class="card-text">5GB Data/day | 6 months | Unlimited Calls | Rs.3999.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="text-center mb-4 mt-5">Data Plans</h3>
+        <div class="row">
+            <div class="col-md-4 plan-card" data-data="1GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">1GB Data Plan</h5>
+                        <p class="card-text">1GB Data | Valid upto your plan Validity | No Calls | Rs.49.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="1.5GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">1.5GB Data Plan</h5>
+                        <p class="card-text">1.5GB Data | Valid upto your plan Validity | No Calls | Rs.181.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="5GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">5GB Data Plan</h5>
+                        <p class="card-text">5GB Data | Valid upto your plan Validity | No Calls | Rs.199.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card mt-4" data-data="10GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">10GB Data Plan</h5>
+                        <p class="card-text">10GB Data | Valid upto your plan Validity | No Calls | Rs.499.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="text-center mb-4 mt-5">Unlimited Data Plans</h3>
+        <div class="row">
+            <div class="col-md-4 plan-card" data-data="1GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">1GB Unlimited 5G</h5>
+                        <p class="card-text">Unlimited Data | 365 days | Unlimited Calls | Rs.2599.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="2GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">2GB Unlimited 5G</h5>
+                        <p class="card-text">Unlimited Data | 365 Days | Unlimited Calls | Rs.3599.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 plan-card" data-data="2.5GB">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">2.5GB Unlimited 5G</h5>
+                        <p class="card-text">Unlimited Data | 365 Days | Unlimited Calls | Rs.3999.00</p>
+                        <a href="payment.html" class="btn btn-success">Recharge Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white text-center py-1">
+        <p>&copy; 2025 MOBI-COMM. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
