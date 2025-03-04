@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MOBI-COMM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f9ff, #e1f5fe, #b3e5fc, #81d4fa);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            max-width: 600px;
+            width: 90%;
+            margin: 2rem auto;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #32b838, #66c57e);
+            padding: 2.5rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1));
+            pointer-events: none;
+        }
+
+        .login-form {
+            padding: 2.5rem;
+            background: white;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #32b838;
+            box-shadow: 0 0 0 0.2rem rgba(50, 184, 56, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #32b838, #66c57e);
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #2a9b30, #58b170);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(50, 184, 56, 0.3);
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            gap: 2rem;
+            text-decoration: none;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            padding: 0.8rem 2rem;
+            color: #6c757d;
+            cursor: pointer;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .toggle-btn:hover {
+            color: #32b838;
+            text-decoration: none;
+        }
+
+        .toggle-btn.active {
+            color: #32b838;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .toggle-btn.active::after {
+            display: none;
+            text-decoration: none;
+        }
+
+        @keyframes slideIn {
+            to { transform: scaleX(1); }
+        }
+
+        .social-links .btn {
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+
+        #otpSection {
+            display: none;
+        }
+        /* Footer alignment */
+        footer {
+            margin-top: auto; /* Push footer to the bottom */
+            width: 100%;
+        }/* Enhanced Navbar Styles */
+        .navbar {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.95)) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #28a745 !important;
+            background-color: rgba(40, 167, 69, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+            .nav-item {
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+        }
+        /* Navbar Animation on Scroll */
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent white */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow when scrolled */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="Adminlogin.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-4">
+        <div class="login-container">
+            <div class="login-header">
+                <h2 class="mb-0">Welcome to MOBI-COMM</h2>
+                <p class="mb-0">Please login to continue</p>
+            </div>
+            <div class="login-form">
+                <!-- User Login Form -->
+                <form id="userForm" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid 10-digit phone number.
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-success" id="sendOtpBtn">Send OTP</button>
+                    </div>
+
+                    <!-- OTP Section -->
+                    <div id="otpSection" class="mt-3" style="display: none;">
+                        <div class="mb-3">
+                            <label class="form-label">Enter OTP</label>
+                            <div class="d-flex justify-content-between gap-2 mb-3">
+                                <input type="text" class="form-control text-center" maxlength="1" pattern="[0-9]" required style="width: 50px; height: 50px; font-size: 1.5rem;">
+                                <input type="text" class="form-control text-center" maxlength="1" pattern="[0-9]" required style="width: 50px; height: 50px; font-size: 1.5rem;">
+                                <input type="text" class="form-control text-center" maxlength="1" pattern="[0-9]" required style="width: 50px; height: 50px; font-size: 1.5rem;">
+                                <input type="text" class="form-control text-center" maxlength="1" pattern="[0-9]" required style="width: 50px; height: 50px; font-size: 1.5rem;">
+                                <input type="text" class="form-control text-center" maxlength="1" pattern="[0-9]" required style="width: 50px; height: 50px; font-size: 1.5rem;">
+                                <input type="text" class="form-control text-center" maxlength="1" pattern="[0-9]" required style="width: 50px; height: 50px; font-size: 1.5rem;">
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter a valid 6-digit OTP.
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="footer-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40" class="mb-4">
+                    <p class="text-muted mb-4">India's most innovative mobile network, providing cutting-edge communication solutions for a connected future.</p>
+                    <div class="social-links mb-4">
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="btn btn-success btn-sm" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p class="mb-2"><i class="fas fa-phone-alt text-success me-2"></i>24/7 Support: 1800-123-4567</p>
+                        <p class="mb-2"><i class="fas fa-envelope text-success me-2"></i>support@mobi-comm.com</p>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-success me-2"></i>123 Tech Park, Bangalore, India</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Company</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>About Us</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Careers</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Contact</a></li>
+                                <li class="mb-2"><a href="locatestore.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Store Locator</a></li>
+                                <li class="mb-2"><a href="business.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Business Solutions</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Investor Relations</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Support & Resources</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Help Center</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>FAQs</a></li>
+                                <li class="mb-2"><a href="TermsofService.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Terms of Service</a></li>
+                                <li class="mb-2"><a href="privacypolicy.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Privacy Policy</a></li>
+                                <li class="mb-2"><a href="chatwithus.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Live Chat</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Network Coverage</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <h5 class="mb-4 text-dark">Stay Connected</h5>
+                            <p class="text-muted mb-4">Subscribe to our newsletter for updates, exclusive offers, and the latest news!</p>
+                            <form class="newsletter-form mb-4">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" placeholder="Enter your email" aria-label="Your email">
+                                    <button class="btn btn-success" type="submit">Subscribe</button>
+                                </div>
+                            </form>
+                            <div class="app-download">
+                                <h6 class="mb-3 text-dark">Download Our Mobile App</h6>
+                                <div class="app-buttons d-flex flex-wrap">
+                                    <a href="#" class="btn btn-dark btn-sm me-2 mb-2"><i class="fab fa-apple me-2"></i>App Store</a>
+                                    <a href="#" class="btn btn-dark btn-sm mb-2"><i class="fab fa-google-play me-2"></i>Play Store</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+                        <p class="mb-0 text-muted">&copy; 2025 MOBI-COMM. All rights reserved. | <a href="#" class="text-muted text-decoration-none">Sitemap</a> | <a href="#" class="text-muted text-decoration-none">Security</a></p>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-lg-end">
+                        <div class="payment-methods">
+                            <span class="me-3 text-muted">Secure Payment Methods:</span>
+                            <img src="assets/visa.png" alt="Visa" height="30" class="me-2">
+                            <img src="assets/mastercard.png" alt="Mastercard" height="30" class="me-2">
+                            <i class="fab fa-cc-paypal fa-2x text-muted me-2"></i>
+                            <i class="fab fa-cc-amex fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const userForm = document.getElementById('userForm');
+        const sendOtpBtn = document.getElementById('sendOtpBtn');
+        const otpSection = document.getElementById('otpSection');
+
+        // Form validation
+        userForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!userForm.checkValidity()) {
+                e.stopPropagation();
+                userForm.classList.add('was-validated');
+                return;
+            }
+            // Redirect to plans page after successful validation
+            window.location.href = 'plans.html';
+        });
+
+        // Send OTP button click handler
+        sendOtpBtn.addEventListener('click', () => {
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+
+            if (email.checkValidity() && phone.checkValidity()) {
+                // Simulate OTP sending
+                alert('OTP sent to your phone number!');
+                otpSection.style.display = 'block';
+                sendOtpBtn.style.display = 'none';
+                
+                // Focus the first OTP input
+                const otpInputs = otpSection.querySelectorAll('input');
+                otpInputs[0].focus();
+
+                // Add input handlers for OTP boxes
+                otpInputs.forEach((input, index) => {
+                    input.addEventListener('input', (e) => {
+                        if (e.target.value.length === 1) {
+                            if (index < otpInputs.length - 1) {
+                                otpInputs[index + 1].focus();
+                            }
+                        }
+                    });
+
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                            otpInputs[index - 1].focus();
+                        }
+                    });
+                });
+            } else {
+                userForm.classList.add('was-validated');
+            }
+        });
+
+        // Function to validate OTP before form submission
+        userForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!userForm.checkValidity()) {
+                e.stopPropagation();
+                userForm.classList.add('was-validated');
+                return;
+            }
+
+            const otpInputs = otpSection.querySelectorAll('input');
+            const otp = Array.from(otpInputs).map(input => input.value).join('');
+            
+            if (otp.length === 6 && /^\d+$/.test(otp)) {
+                // Redirect to plans page after successful validation
+                window.location.href = 'plans.html';
+            } else {
+                alert('Please enter a valid 6-digit OTP');
+            }
+        });
+    </script>
+</body>
+</html>

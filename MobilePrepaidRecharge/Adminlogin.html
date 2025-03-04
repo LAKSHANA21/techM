@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - MOBI-COMM</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/style.css" rel="stylesheet">
+    <style>
+        /* Custom styles to position MOBI-COMM to the left */
+        .login-wrapper {
+            display: flex;
+            align-items: center; /* Vertically center items */
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        .logo-side {
+            background-color: rgb(101, 233, 226);; /* Black background for MOBI-COMM */
+            color: white; /* White text for MOBI-COMM */
+            padding: 20px;
+            text-align: center;
+            font-size: 2em; /* Adjust font size as needed */
+            font-family: Arial, sans-serif; /* Match or choose your font */
+            width: 40%; /* Adjust width ratio as needed */
+            height: 100vh; /* Make it full height */
+            display: flex;
+            justify-content: center; /* Center text horizontally */
+            align-items: center; /* Center text vertically */
+        }
+
+        .login-box {
+            width: 60%; /* Adjust width ratio as needed, to complement logo-side */
+            padding: 20px; /* Add some padding around the login box */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Match height to logo side for vertical alignment */
+        }
+
+        @media (max-width: 768px) { /* Responsive adjustments for smaller screens */
+            .login-wrapper {
+                flex-direction: column; /* Stack logo and login box vertically on small screens */
+                text-align: center; /* Center text on smaller screens */
+            }
+            .logo-side {
+                width: 100%; /* Full width on small screens */
+                height: auto; /* Adjust height to content on small screens */
+            }
+            .login-box {
+                width: 100%; /* Full width on small screens */
+                height: auto; /* Adjust height to content on small screens */
+            }
+        }
+    </style>
+</head>
+<body style="background-color: rgb(101, 233, 226)">
+    <div class="login-wrapper">
+        <div class="logo-side">
+            <!-- <h1 class="text-warning">MOBI-COMM</h1> -->
+             <img src="MOBI-COOM.png" alt="logo" style="width: 400px; margin-left: 70px;">
+        </div>
+        <div class="login-box">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card shadow p-4 bg-light">
+                            <div class="card-body bg-light">
+                                <h4 class="text-center mb-4">Admin Login</h4>
+                                <form action="Admindashboard.html" method="post">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-warning w-100">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+</body>
+</html>

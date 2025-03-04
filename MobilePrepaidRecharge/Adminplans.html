@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Plans</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; overflow-x: hidden; }
+        .sidebar { width: 250px; height: 100vh; background: #f8f9fa; padding: 20px; position: fixed; }
+        .content { margin-left: 250px; padding: 20px; width: calc(100% - 250px); }
+        .table-container { overflow-x: auto; }
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .content { margin-left: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex flex-column flex-md-row">
+        <div class="sidebar" style="background-color: rgb(101, 233, 226);">
+            <!-- <div class="text-warning fs-3 mx-3">MOBI-COMM</div> -->
+            <img src="MOBI-COOM.png" alt="logo" style="width: 200px;">
+            <ul class="nav flex-column mt-3">
+                <li class="nav-item"><a href="Admindashboard.html" class="nav-link  text-dark"><i class="bi bi-speedometer2 fs-4 text-warning"></i>  Dashboard</a></li>
+                <li class="nav-item"><a href="AdminUser.html" class="nav-link  text-dark"><i class="bi bi-people-fill fs-4 text-warning"></i>  Users</a></li>
+                <li class="nav-item"><a href="AdminTransaction.html" class="nav-link  text-dark"><i class="bi bi-send-check-fill fs-4 text-warning"></i>  Transaction history</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h3 class="mb-3">Plan List</h3>
+            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPlanModal">Add Plan</button>
+            <div class="table-container">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Plan ID</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Data Limit</th>
+                            <th>Validity</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Plan Modal -->
+    <div class="modal fade" id="addPlanModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="number" id="addId" class="form-control mb-2" placeholder="Plan ID">
+                    <input type="text" id="addName" class="form-control mb-2" placeholder="Plan Name">
+                    <input type="number" id="addPrice" class="form-control mb-2" placeholder="Price">
+                    <input type="text" id="addDataLimit" class="form-control mb-2" placeholder="Data Limit">
+                    <input type="text" id="addValidity" class="form-control mb-2" placeholder="Validity">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="addPlan()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Plan Modal -->
+    <div class="modal fade" id="editPlanModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editId">
+                    <input type="text" id="editName" class="form-control mb-2" placeholder="Plan Name">
+                    <input type="number" id="editPrice" class="form-control mb-2" placeholder="Price">
+                    <input type="text" id="editDataLimit" class="form-control mb-2" placeholder="Data Limit">
+                    <input type="text" id="editValidity" class="form-control mb-2" placeholder="Validity">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="saveEditedPlan()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PLAN_API_URL = "http://localhost:5000/plans";
+
+        // Fetch and display plans
+        async function fetchPlans() {
+            let response = await fetch(PLAN_API_URL);
+            let plans = await response.json();
+            let planTableBody = document.getElementById("planTableBody");
+
+            planTableBody.innerHTML = plans.map(plan => `
+                <tr id="plan-${plan.id}">
+                    <td>${plan.id}</td>
+                    <td>${plan.name}</td>
+                    <td>${plan.price}</td>
+                    <td>${plan.data}</td>
+                    <td>${plan.validity}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="openEditModal('${plan.id}', '${plan.name}', '${plan.price}', '${plan.data}', '${plan.validity}')">Edit</button>
+                        <button class="btn btn-danger btn-sm" onclick="deletePlan('${plan.id}')">Delete</button>
+                    </td>
+                </tr>`).join('');
+        }
+
+        // Add a new plan
+        async function addPlan() {
+            let newPlan = {
+                id: document.getElementById("addId").value.trim(),
+                name: document.getElementById("addName").value.trim(),
+                price: document.getElementById("addPrice").value.trim(),
+                data: document.getElementById("addDataLimit").value.trim(),
+                validity: document.getElementById("addValidity").value.trim()
+            };
+
+            if (!newPlan.id || !newPlan.name || !newPlan.price || !newPlan.data || !newPlan.validity) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            let response = await fetch(PLAN_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newPlan)
+            });
+
+            if (response.ok) {
+                bootstrap.Modal.getInstance(document.getElementById("addPlanModal")).hide();
+                await fetchPlans();
+            } else {
+                alert("Failed to add plan.");
+            }
+        }
+
+        // Delete a plan
+        async function deletePlan(id) {
+            if (!confirm("Are you sure you want to delete this plan?")) return;
+
+            let response = await fetch(`${PLAN_API_URL}/${id}`, {
+                method: "DELETE"
+            });
+
+            if (response.ok) {
+                await fetchPlans();
+            } else {
+                alert("Failed to delete plan.");
+            }
+        }
+
+        // Open edit modal with plan details
+        function openEditModal(id, name, price, data, validity) {
+            document.getElementById("editId").value = id;
+            document.getElementById("editName").value = name;
+            document.getElementById("editPrice").value = price;
+            document.getElementById("editDataLimit").value = data;
+            document.getElementById("editValidity").value = validity;
+
+            new bootstrap.Modal(document.getElementById("editPlanModal")).show();
+        }
+
+        // Save edited plan
+        async function saveEditedPlan() {
+            let id = document.getElementById("editId").value;
+            let updatedPlan = {
+                id: id,
+                name: document.getElementById("editName").value.trim(),
+                price: document.getElementById("editPrice").value.trim(),
+                data: document.getElementById("editDataLimit").value.trim(),
+                validity: document.getElementById("editValidity").value.trim()
+            };
+
+            let response = await fetch(`${PLAN_API_URL}/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedPlan)
+            });
+
+            if (response.ok) {
+                bootstrap.Modal.getInstance(document.getElementById("editPlanModal")).hide();
+                await fetchPlans();
+            } else {
+                alert("Failed to update plan.");
+            }
+        }
+
+        // Fetch plans on page load
+        document.addEventListener("DOMContentLoaded", fetchPlans);
+    </script>
+</body>
+</html>

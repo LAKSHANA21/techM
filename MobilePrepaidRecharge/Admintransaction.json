@@ -1,0 +1,49 @@
+{
+    "transactions": [
+        {
+            "id": "TXN001",
+            "userName": "John Doe",
+            "mobileNumber": "9876543210",
+            "amount": 50.00,
+            "paymentMethod": "Credit Card",
+            "status": "Success",
+            "dateTime": "2025-02-22T14:30:00"
+        },
+        {
+            "id": "TXN002",
+            "userName": "Alice Smith",
+            "mobileNumber": "9123456780",
+            "amount": 30.00,
+            "paymentMethod": "PayPal",
+            "status": "Failed",
+            "dateTime": "2025-02-22T15:45:00"
+        },
+        {
+            "id": "TXN003",
+            "userName": "Bob Johnson",
+            "mobileNumber": "9988776655",
+            "amount": 75.00,
+            "paymentMethod": "Debit Card",
+            "status": "Success",
+            "dateTime": "2025-02-22T16:20:00"
+        },
+        {
+            "id": "TXN004",
+            "userName": "Emma Watson",
+            "mobileNumber": "9865321470",
+            "amount": 100.00,
+            "paymentMethod": "Net Banking",
+            "status": "Success",
+            "dateTime": "2025-02-22T17:10:00"
+        },
+        {
+            "id": "TXN005",
+            "userName": "Liam Brown",
+            "mobileNumber": "9870012345",
+            "amount": 40.00,
+            "paymentMethod": "UPI",
+            "status": "Failed",
+            "dateTime": "2025-02-22T18:30:00"
+        }
+    ]
+}
