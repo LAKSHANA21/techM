@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management - MOBI-COMM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #e1f5fe, #b3e0ff, #82b1ff, #008000);
+            background-size: 400% 400%;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .account-card {
+            transition: all 0.3s ease;
+            border: none;
+            overflow: hidden;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .account-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .account-card .card-body {
+            padding: 2rem;
+        }
+
+        .progress {
+            height: 12px;
+            border-radius: 6px;
+            background-color: #e9ecef;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            transition: width 1.5s ease;
+            background: linear-gradient(90deg, #198754, #20c997);
+        }
+
+        .usage-stat {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .usage-stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .table {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .btn-outline-success {
+            border-width: 2px;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #198754;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25,135,84,0.3);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(45deg, #dc3545, #fd7e14);
+            color: white;
+            border-radius: 50%;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #198754, #20c997);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .account-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .data-chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }        /* Enhanced Navbar Styles */
+        .navbar {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.95)) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #28a745 !important;
+            background-color: rgba(40, 167, 69, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+            .nav-item {
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+        }
+        /* Navbar Animation on Scroll */
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent white */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow when scrolled */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- Common Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link me-3" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="plans.html">Plans</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="business.html">Business</a>
+                    </li><li class="nav-item me-3">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="login.html">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="fas fa-user-circle fa-lg"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Account Overview Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold text-dark mb-4">Account</h1>
+                    <p class="lead text-dark mb-0">Manage your MOBI-COMM account settings and preferences</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Plan Details Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Current Plan Details</h2>
+            <div class="card shadow-sm mb-5">
+                <div class="card-header bg-success text-white py-3">
+                    <h3 class="h5 mb-0">Current Plan : <span id="planName" class="fw-bold"></span></h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <p class="text-muted mb-2">Plan Validity</p>
+                                <p class="h6 mb-0" id="planValidity">Valid until December 31, 2023</p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-muted mb-2">Plan Cost</p>
+                                <p class="h4 text-success mb-0" id="planCost">$79.99</p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-muted mb-2">Data Usage</p>
+                                <div class="progress mb-2" style="height: 15px;">
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted">75% Used</span>
+                                    <span class="text-muted" id="dataRemaining">25GB of 100GB</span>
+                                </div>
+                            </div>
+                            <div class="usage-stats">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span><i class="fas fa-phone-alt text-success me-2"></i> Voice Minutes</span>
+                                    <span class="badge bg-success">Unlimited</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="fas fa-comment-alt text-success me-2"></i> SMS</span>
+                                    <span class="badge bg-success">Unlimited</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefits-card p-3 bg-light rounded">
+                                <h4 class="h6 mb-3"><i class="fas fa-gift text-success me-2"></i>Plan Benefits</h4>
+                                <ul class="list-unstyled benefits-list" id="planBenefits">
+                                    <!-- plans display dynamically here -->
+                                </ul>
+                                <div class="text-center mt-4">
+                                    <a href="plans.html" class="btn btn-success btn-lg w-100">
+                                        <i class="fas fa-sync-alt me-2"></i>Upgrade Plan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan History Table -->
+            <h2 class="text-center mb-4">Plan History</h2>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Plan</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Invoice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nov 1, 2023</td>
+                            <td>Premium 5G Plan</td>
+                            <td>₹79.99</td>
+                            <td><span class="badge bg-success">Active</span></td>
+                            <td><a href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download me-1"></i> Download</a></td>
+                        </tr>
+                        <tr>
+                            <td>Oct 1, 2023</td>
+                            <td>Premium 5G Plan</td>
+                            <td>₹79.99</td>
+                            <td><span class="badge bg-secondary">Expired</span></td>
+                            <td><a href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download me-1"></i> Download</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sep 1, 2023</td>
+                            <td>Standard 4G Plan</td>
+                            <td>₹59.99</td>
+                            <td><span class="badge bg-secondary">Expired</span></td>
+                            <td><a href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download me-1"></i> Download</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Management Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Personal Information -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card account-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-user-circle fa-2x text-success me-3"></i>
+                                <h3 class="h5 mb-0">Personal Information</h3>
+                            </div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-envelope text-muted me-2"></i> john.doe@example.com</li>
+                                <li class="mb-2"><i class="fas fa-phone text-muted me-2"></i> +1 (555) 123-4567</li>
+                                <li class="mb-2"><i class="fas fa-map-marker-alt text-muted me-2"></i> New York, USA</li>
+                            </ul>
+                            <a href="profile.html" class="btn btn-outline-success">Manage Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscription Management -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card account-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-mobile-alt fa-2x text-success me-3"></i>
+                                <h3 class="h5 mb-0">Subscription</h3>
+                            </div>
+                            <p class="text-muted">View and manage your current plan and upgrade to the available subcriptions.</p>
+                            <a href="plans.html" class="btn btn-outline-success">Manage Plan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing & Payments -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card account-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-credit-card fa-2x text-success me-3"></i>
+                                <h3 class="h5 mb-0">Billing & Payments</h3>
+                            </div>
+                            <p class="text-muted">View payment history and manage payment methods</p>
+                            <a href="payment.html" class="btn btn-outline-success">Manage Payments</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card account-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-shield-alt fa-2x text-success me-3"></i>
+                                <h3 class="h5 mb-0">Security</h3>
+                            </div>
+                            <p class="text-muted">Manage password and security settings</p>
+                            <a href="profile.html#securitySettings" class="btn btn-outline-success">Manage Security</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card account-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-bell fa-2x text-success me-3"></i>
+                                <h3 class="h5 mb-0">Notifications</h3>
+                            </div>
+                            <p class="text-muted">Customize your notification preferences</p>
+                            <a href="#" class="btn btn-outline-success">Manage Notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card account-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-headset fa-2x text-success me-3"></i>
+                                <h3 class="h5 mb-0">Support</h3>
+                            </div>
+                            <p class="text-muted">Get help with your account and services</p>
+                            <a href="support.html" class="btn btn-outline-success">Get Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+
+
+    <footer class="footer-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40" class="mb-4">
+                    <p class="text-muted mb-4">India's most innovative mobile network, providing cutting-edge communication solutions for a connected future.</p>
+                    <div class="social-links mb-4">
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="btn btn-success btn-sm" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p class="mb-2"><i class="fas fa-phone-alt text-success me-2"></i>24/7 Support: 1800-123-4567</p>
+                        <p class="mb-2"><i class="fas fa-envelope text-success me-2"></i>support@mobi-comm.com</p>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-success me-2"></i>123 Tech Park, Bangalore, India</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Company</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>About Us</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Careers</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Contact</a></li>
+                                <li class="mb-2"><a href="locatestore.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Store Locator</a></li>
+                                <li class="mb-2"><a href="business.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Business Solutions</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Investor Relations</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Support & Resources</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Help Center</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>FAQs</a></li>
+                                <li class="mb-2"><a href="TermsofService.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Terms of Service</a></li>
+                                <li class="mb-2"><a href="privacypolicy.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Privacy Policy</a></li>
+                                <li class="mb-2"><a href="chatwithus.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Live Chat</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Network Coverage</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <h5 class="mb-4 text-dark">Stay Connected</h5>
+                            <p class="text-muted mb-4">Subscribe to our newsletter for updates, exclusive offers, and the latest news!</p>
+                            <div class="app-download">
+                                <h6 class="mb-3 text-dark">Download Our Mobile App</h6>
+                                <div class="app-buttons d-flex flex-wrap">
+                                    <a href="#" class="btn btn-dark btn-sm me-2 mb-2"><i class="fab fa-apple me-2"></i>App Store</a>
+                                    <a href="#" class="btn btn-dark btn-sm mb-2"><i class="fab fa-google-play me-2"></i>Play Store</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+                        <p class="mb-0 text-muted">&copy; 2025 MOBI-COMM. All rights reserved. | <a href="#" class="text-muted text-decoration-none">Sitemap</a> | <a href="#" class="text-muted text-decoration-none">Security</a></p>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-lg-end">
+                        <div class="payment-methods">
+                            <span class="me-3 text-muted">Secure Payment Methods:</span>
+                            <img src="assets/visa.png" alt="Visa" height="30" class="me-2">
+                            <img src="assets/mastercard.png" alt="Mastercard" height="30" class="me-2">
+                            <i class="fab fa-cc-paypal fa-2x text-muted me-2"></i>
+                            <i class="fab fa-cc-amex fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize Data Usage Chart
+        const ctx = document.getElementById('dataUsageChart').getContext('2d');
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        const serviceCtx = document.getElementById('serviceChart').getContext('2d');
+        const networkCtx = document.getElementById('networkChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Data Usage (GB)',
+                    data: [25, 45, 60, 75, 85, 70],
+                    borderColor: '#198754',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(25,135,84,0.1)'
+                }, {
+                    label: 'Average Usage',
+                    data: [30, 40, 55, 65, 70, 65],
+                    borderColor: '#6c757d',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        // Function to update plan details from localStorage
+        function updatePlanDetails() {
+            const currentPlan = JSON.parse(localStorage.getItem('currentPlan')) || {
+                name: 'Premium 5G Plan',
+                price: '$79.99',
+                validity: 'Valid until December 31, 2023',
+                data: '100GB',
+                benefits: [
+                    '5G Network Access',
+                    'International Roaming',
+                    'Netflix Subscription',
+                    'Priority Customer Support'
+                ]
+            };
+
+            // Update plan details in the UI
+            document.getElementById('planName').textContent = currentPlan.name;
+            document.getElementById('planValidity').textContent = currentPlan.validity;
+            document.getElementById('planCost').textContent = currentPlan.price;
+
+            // Simulate data usage (can be replaced with actual data)
+            const usedData = 75; // 75GB used
+            const totalData = 100; // 100GB total
+            const usagePercentage = (usedData / totalData) * 100;
+
+            // Update progress bar
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = `${usagePercentage}%`;
+            progressBar.setAttribute('aria-valuenow', usagePercentage);
+
+            // Update data remaining text
+            document.getElementById('dataRemaining').textContent = 
+                `${totalData - usedData}GB of ${totalData}GB`;
+
+            // Update benefits list
+            const benefitsList = document.getElementById('planBenefits');
+            benefitsList.innerHTML = currentPlan.benefits.map(benefit => `
+                <li class="mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="benefit-icon bg-success-light rounded-circle p-2 me-3">
+                            <i class="fas ${getBenefitIcon(benefit)} text-success"></i>
+                        </div>
+                        <span>${benefit}</span>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // Helper function to get appropriate icon for each benefit
+        function getBenefitIcon(benefit) {
+            const iconMap = {
+                '5G Network Access': 'fa-network-wired',
+                'International Roaming': 'fa-globe',
+                'Netflix Subscription': 'fa-film',
+                'Priority Customer Support': 'fa-headset'
+            };
+            return iconMap[benefit] || 'fa-check';
+        }
+
+        // Call the function when page loads
+        document.addEventListener('DOMContentLoaded', updatePlanDetails);
+    </script>
+</body>
+</html>

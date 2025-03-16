@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Transactions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body { 
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif; 
+            margin: 0; 
+            overflow-x: hidden; 
+            background: linear-gradient(135deg, #f6f9fc, #eef2f7); 
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .sidebar { 
+            width: 280px; 
+            height: 100vh; 
+            background: linear-gradient(135deg, #1a2942, #2a4365); 
+            padding: 30px; 
+            position: fixed; 
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .nav-item { 
+            margin-bottom: 15px; 
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+            animation-delay: calc(var(--nav-index, 0) * 0.1s);
+        }
+        .content { 
+            margin-left: 280px; 
+            padding: 30px; 
+            width: calc(100% - 280px);
+            min-height: 100vh;
+            background: linear-gradient(145deg, #f8fafc, #ffffff);
+            transition: all 0.3s ease;
+        }
+        .table-container { 
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.6s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .table-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .nav-link { 
+            border-radius: 12px; 
+            padding: 16px 22px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .nav-link:hover { 
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .nav-link:hover:before {
+            left: 100%;
+        }
+        .nav-link i {
+            transition: transform 0.3s ease;
+            margin-right: 12px;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .nav-link:hover i {
+            transform: scale(1.15);
+            color: rgba(255, 255, 255, 1);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.5);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table th {
+            background: linear-gradient(145deg, #2c3e50, #3498db);
+            color: white;
+            font-weight: 600;
+            padding: 15px 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            border: none;
+        }
+        .table td {
+            padding: 12px 20px;
+            border: none;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .table tbody tr {
+            transition: all 0.2s ease;
+        }
+        .table tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+            transform: translateY(-2px);
+        }
+        .badge {
+            padding: 8px 12px;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(145deg, #2980b9, #3498db);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .content { margin-left: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex flex-column flex-md-row">
+        <div class="sidebar"style="background: linear-gradient(45deg, #021300, #03ff03)">
+            <div class="text-center mb-4">
+                <img src="MOBI-COOM.png" alt="logo" style="width: 180px; transition: transform 0.3s ease;" class="img-fluid hover-scale">
+            </div>
+            <ul class="nav flex-column nav-pills gap-2">
+                <li class="nav-item">
+                    <a href="Admindashboard.html" class="nav-link text-white d-flex align-items-center p-3 rounded-3 hover-lift">
+                        <i class="bi bi-speedometer2 fs-4 text-white me-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="AdminUser.html" class="nav-link text-white d-flex align-items-center p-3 rounded-3 hover-lift">
+                        <i class="bi bi-people-fill fs-4 text-white me-3"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="AdminTransaction.html" class="nav-link active text-white d-flex align-items-center p-3 rounded-3 hover-lift">
+                        <i class="bi bi-send-check-fill fs-4 text-white me-3"></i>
+                        <span>Transaction History</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="Adminplans.html" class="nav-link text-white d-flex align-items-center p-3 rounded-3 hover-lift">
+                        <i class="bi bi-file-earmark-bar-graph-fill fs-4 text-white me-3"></i>
+                        <span>Plan Management</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-4">
+                    <a href="Adminlogin.html" class="nav-link text-white d-flex align-items-center p-3 rounded-3 hover-lift">
+                        <i class="bi bi-box-arrow-right fs-4 text-danger me-3"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+                        </ul>
+        </div>
+        
+        <div class="content">
+            <h3 class="mb-3">Transaction History</h3>
+
+            <!-- Download Report Button -->
+            <button class="btn btn-primary mb-3" onclick="downloadReport()" style="margin-left: 800px;">Download Report</button>
+
+            <div class="table-container">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Recharge ID</th>
+                            <th>Recharge Date</th>
+                            <th>User ID</th>
+                            <th>Plan ID</th>
+                            <th>Payment ID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionTableBody"></tbody>
+                </table>
+            </div>
+
+            <h3 class="mb-3 mt-5">Payments History</h3>
+
+            <!-- Download Report Button for Payments History -->
+            <button class="btn btn-primary mb-3" onclick="downloadPaymentsReport()" style="margin-left: 800px;">Download Report</button>
+        
+            <div class="table-container">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>Payment Method</th>
+                            <th>Amount</th>
+                            <th>Payment Status</th>
+                            <th>Recharge ID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+       const RECHARGE_HISTORY_API_URL = "http://localhost:8040/api/rechargehistory"; // Update with your backend URL
+let rechargeHistory = []; // Store recharge history globally for export
+
+async function fetchRechargeHistory() {
+    try {
+        let response = await fetch(RECHARGE_HISTORY_API_URL);
+        if (!response.ok) throw new Error("Failed to fetch recharge history");
+
+        rechargeHistory = await response.json(); // Store recharge history globally
+        let rechargeTableBody = document.getElementById("transactionTableBody");
+
+        rechargeTableBody.innerHTML = rechargeHistory.map(history => `
+            <tr>
+                <td>${history.rechargeId}</td>
+                <td>${new Date(history.rechargeDate).toLocaleDateString()}</td>
+                <td>${history.userId}</td>
+                <td>${history.planId}</td>
+                <td>${history.paymentId}</td>
+            </tr>`).join('');
+    } catch (error) {
+        console.error("Error fetching recharge history:", error);
+    }
+}
+
+function downloadReport() {
+    if (rechargeHistory.length === 0) {
+        alert("No recharge history available to download.");
+        return;
+    }
+
+    let csvContent = "Recharge ID,Recharge Date,User ID,Plan ID,Payment ID\n";
+
+    rechargeHistory.forEach(history => {
+        let row = `${history.rechargeId},${new Date(history.rechargeDate).toLocaleDateString()},${history.userId},${history.planId},${history.paymentId}`;
+        csvContent += row + "\n";
+    });
+
+    let blob = new Blob([csvContent], { type: "text/csv" });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "Recharge_History_Report.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+document.addEventListener("DOMContentLoaded", fetchRechargeHistory);
+
+const PAYMENTS_API_URL = "http://localhost:8040/api/payments"; // Update with your backend URL
+let paymentsHistory = []; // Store payments history globally for export
+
+async function fetchPaymentsHistory() {
+    try {
+        let response = await fetch(PAYMENTS_API_URL);
+        if (!response.ok) throw new Error("Failed to fetch payments history");
+
+        paymentsHistory = await response.json(); // Store payments history globally
+        let paymentsTableBody = document.getElementById("paymentsTableBody");
+
+        paymentsTableBody.innerHTML = paymentsHistory.map(payment => `
+            <tr>
+                <td>${payment.paymentId}</td>
+                <td>${payment.paymentMethod}</td>
+                <td>${payment.amount}</td>
+                <td>${payment.paymentStatus}</td>
+                <td>${payment.rechargeId}</td>
+            </tr>`).join('');
+    } catch (error) {
+        console.error("Error fetching payments history:", error);
+    }
+}
+
+function downloadPaymentsReport() {
+    if (paymentsHistory.length === 0) {
+        alert("No payments history available to download.");
+        return;
+    }
+
+    let csvContent = "Payment ID,Payment Method,Amount,Payment Status,Recharge ID\n";
+
+    paymentsHistory.forEach(payment => {
+        let row = `${payment.paymentId},${payment.paymentMethod},${payment.amount},${payment.paymentStatus},${payment.rechargeId}`;
+        csvContent += row + "\n";
+    });
+
+    let blob = new Blob([csvContent], { type: "text/csv" });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "Payments_History_Report.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchRechargeHistory();
+    fetchPaymentsHistory();
+});
+    </script>
+</body>
+</html>

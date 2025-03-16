@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Center - MOBI-COMM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .search-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        .search-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+        .category-card {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            position: relative;
+            z-index: 1;
+        }
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, #4CAF50, #81C784);
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            opacity: 0;
+            border-radius: 15px;
+        }
+        .category-card:hover::before {
+            opacity: 0.1;
+        }
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .contact-card {
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: none;
+        }
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.15);
+        }
+        .chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.25);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        .chat-bubble:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 12px 30px rgba(76, 175, 80, 0.3);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-image: url('assets/support.webp');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: soft-light;
+            animation: gradientAnimation 15s ease infinite;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .btn-outline-success {
+            transition: all 0.3s ease;
+            border-width: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-outline-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+        }
+        .social-links a {
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .social-links a:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: #4CAF50 !important;
+        }
+        .input-group .form-control {
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        .input-group .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+        }
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+        }        /* Enhanced Navbar Styles */
+        .navbar {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.95)) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #28a745 !important;
+            background-color: rgba(40, 167, 69, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+            .nav-item {
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+        }
+        /* Navbar Animation on Scroll */
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent white */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow when scrolled */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <!-- Common Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link me-3" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="plans.html">Plans</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="business.html">Business</a>
+                    </li><li class="nav-item me-3">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="login.html">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="fas fa-user-circle fa-lg"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-5 min-vh-100 d-flex align-items-center">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">How can we help you today?</h1>
+                    <div class="search-box p-3 mb-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg border-0" placeholder="Search for help...">
+                            <button class="btn btn-success btn-lg"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <p class="lead mb-4">Get instant answers from our help center or connect with our support team</p>
+                </div>
+                <div class="col-lg-6 text-center" data-aos="fade-left">
+                    <img src="assets/account.jpg" alt="Support" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Categories -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Browse by Category</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="category-card bg-white p-4 h-100 shadow-sm">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-sim-card fa-2x text-success me-3"></i>
+                            <h3 class="h5 mb-0">SIM & Network</h3>
+                        </div>
+                        <p class="text-muted">Activation, network coverage, and connectivity issues</p>
+                        <div class="mt-3">
+                            <span class="badge bg-success-subtle text-success me-2">24/7 Support</span>
+                            <span class="badge bg-success-subtle text-success">Quick Resolution</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-card bg-white p-4 h-100 shadow-sm">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-rupee-sign fa-2x text-success me-3"></i>
+                            <h3 class="h5 mb-0">Billing & Payments</h3>
+                        </div>
+                        <p class="text-muted">Plans, recharges, and payment-related queries</p>
+                        <div class="mt-3">
+                            <span class="badge bg-success-subtle text-success me-2">Secure Payments</span>
+                            <span class="badge bg-success-subtle text-success">Instant Support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="category-card bg-white p-4 h-100 shadow-sm">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-user-shield fa-2x text-success me-3"></i>
+                            <h3 class="h5 mb-0">Account Security</h3>
+                        </div>
+                        <p class="text-muted">Account access, security, and privacy concerns</p>
+                        <div class="mt-3">
+                            <span class="badge bg-success-subtle text-success me-2">Enhanced Security</span>
+                            <span class="badge bg-success-subtle text-success">Privacy First</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Stats -->
+    <section class="py-5 bg-success text-white position-relative">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('assets/support.jpg') center/cover; opacity: 0.1;"></div>
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-3" data-aos="fade-up">
+                    <div class="p-4 rounded-3 bg-success-subtle bg-opacity-25">
+                        <i class="fas fa-users fa-2x mb-3"></i>
+                        <h3 class="counter" data-target="1000000">0</h3>
+                        <p class="mb-0">Happy Customers</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-4 rounded-3 bg-success-subtle bg-opacity-25">
+                        <i class="fas fa-headset fa-2x mb-3"></i>
+                        <h3 class="counter" data-target="24">0</h3>
+                        <p class="mb-0">Hours Support</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-4 rounded-3 bg-success-subtle bg-opacity-25">
+                        <i class="fas fa-clock fa-2x mb-3"></i>
+                        <h3 class="counter" data-target="99">0</h3>
+                        <p class="mb-0">Response Rate %</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-4 rounded-3 bg-success-subtle bg-opacity-25">
+                        <i class="fas fa-map-marker-alt fa-2x mb-3"></i>
+                        <h3 class="counter" data-target="500">0</h3>
+                        <p class="mb-0">Service Centers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Frequently Asked Questions</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion custom-accordion" id="faqAccordion" style="--bs-accordion-btn-bg: #f8f9fa; --bs-accordion-active-bg: #e8f5e9; --bs-accordion-active-color: #2e7d32;">
+                        <div class="accordion-item border-0 mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How do I activate my new SIM card?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    To activate your new SIM card, simply insert it into your phone and follow the on-screen instructions. If you need assistance, you can call our 24/7 support line or visit your nearest MOBI-COMM store.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border-0 mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    What should I do if I lose network coverage?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    If you experience network issues, try these steps:
+                                    <ul>
+                                        <li>Restart your device</li>
+                                        <li>Check if airplane mode is off</li>
+                                        <li>Update your network settings</li>
+                                        <li>Contact our support if the issue persists</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border-0 mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How can I check my data usage?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    You can check your data usage through:
+                                    <ul>
+                                        <li>MOBI-COMM mobile app</li>
+                                        <li>Your account dashboard</li>
+                                        <li>Dial *123# from your phone</li>
+                                        <li>SMS 'USAGE' to 12345</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Options -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Get in Touch</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-card text-center p-4 bg-light h-100">
+                        <i class="fas fa-headset fa-3x text-success mb-3"></i>
+                        <h3 class="h5">24/7 Phone Support</h3>
+                        <p class="mb-3">Talk to our support team anytime</p>
+                        <a href="tel:+911234567890" class="btn btn-outline-success">+91 1234 567 890</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-card text-center p-4 bg-light h-100">
+                        <i class="fas fa-envelope fa-3x text-success mb-3"></i>
+                        <h3 class="h5">Email Support</h3>
+                        <p class="mb-3">Get response within 24 hours</p>
+                        <a href="mailto:support@mobicoom.in" class="btn btn-outline-success">support@mobicoom.in</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-card text-center p-4 bg-light h-100">
+                        <i class="fas fa-store fa-3x text-success mb-3"></i>
+                        <h3 class="h5">Visit Store</h3>
+                        <p class="mb-3">Find nearest MOBI-COMM store</p>
+                        <a href="locatestore.html" class="btn btn-outline-success">Locate Store</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Chat Bubble -->
+    <div class="chat-bubble d-flex align-items-center">
+        <a href="chatwithus.html" class="text-decoration-none text-dark">
+            <i class="fas fa-comments me-2"></i>
+            <span>Chat with Us</span>
+        </a>
+    </div>
+
+
+ 
+    <footer class="footer-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40" class="mb-4">
+                    <p class="text-muted mb-4">India's most innovative mobile network, providing cutting-edge communication solutions for a connected future.</p>
+                    <div class="social-links mb-4">
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="btn btn-success btn-sm" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p class="mb-2"><i class="fas fa-phone-alt text-success me-2"></i>24/7 Support: 1800-123-4567</p>
+                        <p class="mb-2"><i class="fas fa-envelope text-success me-2"></i>support@mobi-comm.com</p>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-success me-2"></i>123 Tech Park, Bangalore, India</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Company</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>About Us</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Careers</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Contact</a></li>
+                                <li class="mb-2"><a href="locatestore.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Store Locator</a></li>
+                                <li class="mb-2"><a href="business.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Business Solutions</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Investor Relations</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Support & Resources</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Help Center</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>FAQs</a></li>
+                                <li class="mb-2"><a href="TermsofService.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Terms of Service</a></li>
+                                <li class="mb-2"><a href="privacypolicy.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Privacy Policy</a></li>
+                                <li class="mb-2"><a href="chatwithus.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Live Chat</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Network Coverage</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <h5 class="mb-4 text-dark">Stay Connected</h5>
+                            <p class="text-muted mb-4">Subscribe to our newsletter for updates, exclusive offers, and the latest news!</p>
+                            <div class="app-download">
+                                <h6 class="mb-3 text-dark">Download Our Mobile App</h6>
+                                <div class="app-buttons d-flex flex-wrap">
+                                    <a href="#" class="btn btn-dark btn-sm me-2 mb-2"><i class="fab fa-apple me-2"></i>App Store</a>
+                                    <a href="#" class="btn btn-dark btn-sm mb-2"><i class="fab fa-google-play me-2"></i>Play Store</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+                        <p class="mb-0 text-muted">&copy; 2025 MOBI-COMM. All rights reserved. | <a href="#" class="text-muted text-decoration-none">Sitemap</a> | <a href="#" class="text-muted text-decoration-none">Security</a></p>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-lg-end">
+                        <div class="payment-methods">
+                            <span class="me-3 text-muted">Secure Payment Methods:</span>
+                            <img src="assets/visa.png" alt="Visa" height="30" class="me-2">
+                            <img src="assets/mastercard.png" alt="Mastercard" height="30" class="me-2">
+                            <i class="fab fa-cc-paypal fa-2x text-muted me-2"></i>
+                            <i class="fab fa-cc-amex fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        .custom-accordion .accordion-button:not(.collapsed) {
+            color: var(--bs-accordion-active-color);
+            background-color: var(--bs-accordion-active-bg);
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+        .custom-accordion .accordion-button:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, .25);
+        }
+        .category-card:hover .text-success {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+        .search-box input::placeholder {
+            color: #6c757d;
+            opacity: 0.8;
+        }
+        .search-box .btn-success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            padding: 0.8rem 2rem;
+        }
+        .contact-card .btn-outline-success:hover {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-color: transparent;
+        }
+    </style>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            const inc = target / speed;
+
+            const updateCount = () => {
+                if (count < target) {
+                    count += inc;
+                    counter.innerText = Math.ceil(count).toLocaleString();
+                    setTimeout(updateCount, 1);
+                } else {
+                    counter.innerText = target.toLocaleString();
+                }
+            };
+
+            updateCount();
+        };
+
+        // Intersection Observer for counters
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // Navbar scroll effect with blur
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled', 'shadow');
+            } else {
+                navbar.classList.remove('scrolled', 'shadow');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

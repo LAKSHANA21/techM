@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MOBI-COMM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #e0f7fa, #cddc39);
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/about.jpg') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .team-member img:hover {
+            transform: scale(1.05);
+        }
+        .milestone-card {
+            border-left: 4px solid #cddc39;
+            padding: 20px;
+            margin: 20px 0;
+            background: #fff;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .testimonial-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .quote-icon {
+            font-size: 2rem;
+            color: #cddc39;
+        }
+        .milestone-card {
+            border-left: 4px solid #cddc39;
+            padding: 20px;
+            margin: 20px 0;
+            background: #fff;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .testimonial-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .quote-icon {
+            font-size: 2rem;
+            color: #cddc39;
+        }        /* Enhanced Navbar Styles */
+        .navbar {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.95)) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #28a745 !important;
+            background-color: rgba(40, 167, 69, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+            .nav-item {
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+        }
+        /* Navbar Animation on Scroll */
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent white */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow when scrolled */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+        .fab.fa-linkedin {
+      color: #0077B5;
+    }
+    .fab.fa-github{
+        color: black;
+    }
+    </style>
+</head>
+<body>
+    <!-- Include Common Header -->
+    <!-- Common Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link me-3" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="plans.html">Plans</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="business.html">Business</a>
+                    </li><li class="nav-item me-3">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="login.html">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="fas fa-user-circle fa-lg"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">Our Story</h1>
+                    <p class="lead">Since 2010, MOBI-COMM has been revolutionizing the mobile communication industry with innovative solutions and unwavering commitment to customer satisfaction.</p>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="assets/plans.jpg " alt="About Us" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Values -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up">
+                    <h2 class="fw-bold mb-4">Our Mission</h2>
+                    <p class="lead mb-4">To provide cutting-edge mobile solutions that empower businesses and individuals to stay connected in an ever-evolving digital world.</p>
+                    <div class="achievement-stats row text-center g-3">
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded-3 shadow-sm">
+                                <h3 class="counter fw-bold text-success" data-target="15">0</h3>
+                                <p class="mb-0">Years of Excellence</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 bg-light rounded-3 shadow-sm">
+                                <h3 class="counter fw-bold text-success" data-target="1000000">0</h3>
+                                <p class="mb-0">Happy Customers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="fw-bold mb-4">Our Values</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Innovation Excellence</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Customer First Approach</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Integrity & Trust</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Sustainable Growth</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Our Leadership Team</h2>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up">
+                    <div class="team-member text-center">
+                        <img src="assets/proicon.jpg" alt="CEO" class="mb-4">
+                        <h4 class="fw-bold">John Smith</h4>
+                        <p class="text-muted mb-2">Chief Executive Officer</p>
+                        <p class="small text-muted">20+ years of experience in telecom industry. Expert in telecommunication.</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-member text-center">
+                        <img src="assets/proicon.jpg" alt="CTO" class="mb-4">
+                        <h4 class="fw-bold">Sarah Johnson</h4>
+                        <p class="text-muted mb-2">Chief Technology Officer</p>
+                        <p class="small text-muted">Former Tech Lead at Google. Expert in 5G and IoT solutions.</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-member text-center">
+                        <img src="assets/proicon.jpg" alt="COO" class="mb-4">
+                        <h4 class="fw-bold">Michael Chen</h4>
+                        <p class="text-muted mb-2">Chief Operations Officer</p>
+                        <p class="small text-muted">MBA from Harvard. Specialized in scaling operations globally.</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5" data-aos="fade-up">What Our Customers Say</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left quote-icon mb-3"></i>
+                        <p class="mb-4">"MOBI-COMM's solutions are innovative and reliable and made our bussiness communication."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="assets/proicon.jpg" alt="Customer" class="rounded-circle me-3" width="50">
+                            <div>
+                                <h6 class="fw-bold mb-0">David Wilson</h6>
+                                <small class="text-muted">CEO, Tech Solutions Inc</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left quote-icon mb-3"></i>
+                        <p class="mb-4">"The network coverage is outstanding! I travel frequently and never have connectivity issues."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="assets/profile.jpg" alt="Customer" class="rounded-circle me-3" width="50">
+                            <div>
+                                <h6 class="fw-bold mb-0">Sarah Chen</h6>
+                                <small class="text-muted">Travel Blogger</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left quote-icon mb-3"></i>
+                        <p class="mb-4">"The 5G speeds are incredible! Perfect for streaming and gaming on the go. Unlimited 5G."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="assets/profile.jpg" alt="Customer" class="rounded-circle me-3" width="50">
+                            <div>
+                                <h6 class="fw-bold mb-0">Alex Thompson</h6>
+                                <small class="text-muted">Professional Gamer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40" class="mb-4">
+                    <p class="text-muted mb-4">India's most innovative mobile network, providing cutting-edge communication solutions for a connected future.</p>
+                    <div class="social-links mb-4">
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="btn btn-success btn-sm" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p class="mb-2"><i class="fas fa-phone-alt text-success me-2"></i>24/7 Support: 1800-123-4567</p>
+                        <p class="mb-2"><i class="fas fa-envelope text-success me-2"></i>support@mobi-comm.com</p>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-success me-2"></i>123 Tech Park, Bangalore, India</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Company</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>About Us</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Careers</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Contact</a></li>
+                                <li class="mb-2"><a href="locatestore.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Store Locator</a></li>
+                                <li class="mb-2"><a href="business.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Business Solutions</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Investor Relations</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Support & Resources</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Help Center</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>FAQs</a></li>
+                                <li class="mb-2"><a href="TermsofService.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Terms of Service</a></li>
+                                <li class="mb-2"><a href="privacypolicy.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Privacy Policy</a></li>
+                                <li class="mb-2"><a href="chatwithus.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Live Chat</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Network Coverage</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <h5 class="mb-4 text-dark">Stay Connected</h5>
+                            <p class="text-muted mb-4">Subscribe to our newsletter for updates, exclusive offers, and the latest news!</p>
+                            <div class="app-download">
+                                <h6 class="mb-3 text-dark">Download Our Mobile App</h6>
+                                <div class="app-buttons d-flex flex-wrap">
+                                    <a href="#" class="btn btn-dark btn-sm me-2 mb-2"><i class="fab fa-apple me-2"></i>App Store</a>
+                                    <a href="#" class="btn btn-dark btn-sm mb-2"><i class="fab fa-google-play me-2"></i>Play Store</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+                        <p class="mb-0 text-muted">&copy; 2025 MOBI-COMM. All rights reserved. | <a href="#" class="text-muted text-decoration-none">Sitemap</a> | <a href="#" class="text-muted text-decoration-none">Security</a></p>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-lg-end">
+                        <div class="payment-methods">
+                            <span class="me-3 text-muted">Secure Payment Methods:</span>
+                            <img src="assets/visa.png" alt="Visa" height="30" class="me-2">
+                            <img src="assets/mastercard.png" alt="Mastercard" height="30" class="me-2">
+                            <i class="fab fa-cc-paypal fa-2x text-muted me-2"></i>
+                            <i class="fab fa-cc-amex fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include Common Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                counter.textContent = Math.round(current).toLocaleString();
+
+                if (current < target) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target.toLocaleString();
+                }
+            };
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    if (entries[0].isIntersecting) {
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
+                },
+                { threshold: 0.5 }
+            );
+
+            observer.observe(counter);
+        });
+
+        // Load common header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header
+            fetch('src/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+
+            // Load footer
+            fetch('src/common.html')
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const footer = doc.querySelector('footer');
+                    document.getElementById('footer-placeholder').innerHTML = footer.outerHTML;
+                });
+        });
+    </script>
+</body>
+</html>

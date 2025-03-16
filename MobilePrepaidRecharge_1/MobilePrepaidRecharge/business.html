@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Solutions - MOBI-COMM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            padding: 120px 0 80px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/bussiness.jpg') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        .solution-card {
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+        }
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(76, 175, 80, 0.2);
+        }
+        .case-study-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 15px;
+        }
+        .case-study-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .case-study-card img {
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .contact-form {
+            background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(76, 175, 80, 0.1);
+        }
+        .stats-card {
+            border-left: 4px solid #4CAF50;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.15);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+        #submitInquiry {
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            border: none;
+        }
+        #submitInquiry {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+            background: linear-gradient(135deg, #43A047, #66BB6A);
+        }       
+         /* Enhanced Navbar Styles */
+        .navbar {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(240, 255, 240, 0.95)) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #28a745 !important;
+            background-color: rgba(40, 167, 69, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .navbar-toggler:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+            .nav-item {
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+        }
+        /* Navbar Animation on Scroll */
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent white */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow when scrolled */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <!-- Common Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link me-3" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="plans.html">Plans</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="business.html">Business</a>
+                    </li><li class="nav-item me-3">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="login.html">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="fas fa-user-circle fa-lg"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">Enterprise Solutions for Your Business</h1>
+                    <p class="lead mb-4">Transform your business communication with MOBI-COMM's enterprise-grade solutions.</p>
+                    <a href="scheduleAdemo.html" class="btn btn-light btn-lg">Schedule a Demo</a>
+                </div>
+                <div class="col-lg-6 text-center" data-aos="fade-left">
+                    <img src="assets/bussiness.jpg" alt="Business Solutions" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Solutions -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Our Business Solutions</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="solution-card card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-building fa-3x text-success mb-3"></i>
+                            <h3 class="h4">Enterprise Plans</h3>
+                            <p class="text-muted">Customized mobile plans for your entire organization with volume discounts and flexible scaling options.</p>
+                            <ul class="list-unstyled text-start mt-3">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Volume-based pricing</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Flexible contracts</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dedicated account manager</li>
+                            </ul>
+                            <a href="plans.html" class="btn btn-outline-success mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="solution-card card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-cloud fa-3x text-success mb-3"></i>
+                            <h3 class="h4">Cloud Integration</h3>
+                            <p class="text-muted">Seamless integration with your existing cloud infrastructure and enterprise applications.</p>
+                            <ul class="list-unstyled text-start mt-3">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> API integration</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Real-time sync</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Custom workflows</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-success mt-3">Explore APIs</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="solution-card card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+                            <h3 class="h4">Security Solutions</h3>
+                            <p class="text-muted">Enterprise-grade security features to protect your business communications and data.</p>
+                            <ul class="list-unstyled text-start mt-3">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> End-to-end encryption</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Advanced threat protection</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Compliance support</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-success mt-3">View Security Features</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" data-aos="fade-up">
+                    <div class="stats-card">
+                        <h3 class="h2 mb-2">5000+</h3>
+                        <p class="text-muted mb-0">Business Clients</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stats-card">
+                        <h3 class="h2 mb-2">99.9%</h3>
+                        <p class="text-muted mb-0">Network Uptime</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stats-card">
+                        <h3 class="h2 mb-2">24/7</h3>
+                        <p class="text-muted mb-0">Support</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stats-card">
+                        <h3 class="h2 mb-2">50+</h3>
+                        <p class="text-muted mb-0">Countries</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Success Stories</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="case-study-card">
+                        <img src="assets/image1.jpg" alt="Case Study 1" class="img-fluid mb-3">
+                        <h4>Tech Corp Solutions</h4>
+                        <p class="text-muted">Reduced communication costs by 40% with our enterprise plan.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="case-study-card">
+                        <img src="assets/image2.jpg" alt="Case Study 2" class="img-fluid mb-3">
+                        <h4>Global Logistics Inc</h4>
+                        <p class="text-muted">Improved fleet management efficiency by 60%.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="case-study-card">
+                        <img src="assets/image3.jpg" alt="Case Study 3" class="img-fluid mb-3">
+                        <h4>Retail Chain Group</h4>
+                        <p class="text-muted">Seamless communication across 500+ locations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form p-5" data-aos="fade-up">
+                        <h2 class="text-center mb-4">Get in Touch</h2>
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Company Name">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Contact Person">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Business Email">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control" placeholder="Phone Number">
+                                </div>
+                                <div class="col-12">
+                                    <select class="form-select">
+                                        <option selected>Select Service Interest</option>
+                                        <option>Enterprise Plans</option>
+                                        <option>Cloud Integration</option>
+                                        <option>Security Solutions</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-success btn-lg" id="submitInquiry">Submit Inquiry</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <img src="MOBI-COOM.png" alt="MOBI-COMM" height="40" class="mb-4">
+                    <p class="text-muted mb-4">India's most innovative mobile network, providing cutting-edge communication solutions for a connected future.</p>
+                    <div class="social-links mb-4">
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-success btn-sm me-2" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="btn btn-success btn-sm" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="contact-info">
+                        <p class="mb-2"><i class="fas fa-phone-alt text-success me-2"></i>24/7 Support: 1800-123-4567</p>
+                        <p class="mb-2"><i class="fas fa-envelope text-success me-2"></i>support@mobi-comm.com</p>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-success me-2"></i>123 Tech Park, Bangalore, India</p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Company</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>About Us</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Careers</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Contact</a></li>
+                                <li class="mb-2"><a href="locatestore.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Store Locator</a></li>
+                                <li class="mb-2"><a href="business.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Business Solutions</a></li>
+                                <li class="mb-2"><a href="about.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Investor Relations</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <h5 class="mb-4 text-dark">Support & Resources</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Help Center</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>FAQs</a></li>
+                                <li class="mb-2"><a href="TermsofService.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Terms of Service</a></li>
+                                <li class="mb-2"><a href="privacypolicy.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Privacy Policy</a></li>
+                                <li class="mb-2"><a href="chatwithus.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Live Chat</a></li>
+                                <li class="mb-2"><a href="support.html" class="text-decoration-none text-muted hover-success"><i class="fas fa-chevron-right me-2 small text-success"></i>Network Coverage</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <h5 class="mb-4 text-dark">Stay Connected</h5>
+                            <p class="text-muted mb-4">Subscribe to our newsletter for updates, exclusive offers, and the latest news!</p>
+                            <div class="app-download">
+                                <h6 class="mb-3 text-dark">Download Our Mobile App</h6>
+                                <div class="app-buttons d-flex flex-wrap">
+                                    <a href="#" class="btn btn-dark btn-sm me-2 mb-2"><i class="fab fa-apple me-2"></i>App Store</a>
+                                    <a href="#" class="btn btn-dark btn-sm mb-2"><i class="fab fa-google-play me-2"></i>Play Store</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+                        <p class="mb-0 text-muted">&copy; 2025 MOBI-COMM. All rights reserved. | <a href="#" class="text-muted text-decoration-none">Sitemap</a> | <a href="#" class="text-muted text-decoration-none">Security</a></p>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-lg-end">
+                        <div class="payment-methods">
+                            <span class="me-3 text-muted">Secure Payment Methods:</span>
+                            <img src="assets/visa.png" alt="Visa" height="30" class="me-2">
+                            <img src="assets/mastercard.png" alt="Mastercard" height="30" class="me-2">
+                            <i class="fab fa-cc-paypal fa-2x text-muted me-2"></i>
+                            <i class="fab fa-cc-amex fa-2x text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-sm');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-sm');
+            }
+        });
+    </script>
+</body>
+</html>
